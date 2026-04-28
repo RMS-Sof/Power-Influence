@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Power, Status & Influence — Academic Reference</title>
+<style>
+  :root {
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f4ef;
+    --color-text-primary: #1a1a18;
+    --color-text-secondary: #6b6a63;
+    --color-text-tertiary: #9c9a92;
+    --color-text-info: #185fa5;
+    --color-border-tertiary: rgba(0,0,0,0.12);
+    --color-border-secondary: rgba(0,0,0,0.22);
+    --color-border-primary: rgba(0,0,0,0.35);
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+    --font-sans: system-ui, -apple-system, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background-primary: #1e1e1c;
+      --color-background-secondary: #2a2a28;
+      --color-text-primary: #e8e6de;
+      --color-text-secondary: #9c9a92;
+      --color-text-tertiary: #6b6a63;
+      --color-text-info: #85b7eb;
+      --color-border-tertiary: rgba(255,255,255,0.1);
+      --color-border-secondary: rgba(255,255,255,0.18);
+      --color-border-primary: rgba(255,255,255,0.28);
+    }
+    .av-purple{background:#26215C!important;color:#AFA9EC!important}
+    .av-teal{background:#04342C!important;color:#5DCAA5!important}
+    .av-coral{background:#4A1B0C!important;color:#F0997B!important}
+    .av-amber{background:#412402!important;color:#EF9F27!important}
+    .av-blue{background:#042C53!important;color:#85B7EB!important}
+    .av-gray{background:#2C2C2A!important;color:#B4B2A9!important}
+    .tag-purple{color:#AFA9EC!important}
+    .tag-teal{color:#5DCAA5!important}
+    .tag-coral{color:#F0997B!important}
+    .tag-amber{color:#EF9F27!important}
+    .tag-blue{color:#85B7EB!important}
+    .badge-purple{background:#26215C!important;color:#AFA9EC!important}
+    .badge-teal{background:#04342C!important;color:#5DCAA5!important}
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font-sans);font-size:14px;line-height:1.6;color:var(--color-text-primary);background:var(--color-background-secondary);min-height:100vh;padding:2rem}
+  .container{max-width:740px;margin:0 auto;background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);padding:1.5rem 2rem}
+  .tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+  .tab{padding:6px 14px;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);cursor:pointer;font-size:13px;color:var(--color-text-secondary);background:transparent;transition:all .15s;font-family:var(--font-sans)}
+  .tab.active{background:var(--color-background-secondary);color:var(--color-text-primary);border-color:var(--color-border-primary);font-weight:500}
+  .tab:hover:not(.active){border-color:var(--color-border-primary)}
+  .panel{display:none}
+  .panel.active{display:block}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+  .card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;cursor:pointer;transition:border-color .15s}
+  .card:hover{border-color:var(--color-border-primary)}
+  .card-tag{font-size:11px;font-weight:500;letter-spacing:.04em;margin-bottom:6px;text-transform:uppercase}
+  .card h3{font-size:14px;font-weight:500;margin-bottom:4px}
+  .card p{font-size:13px;color:var(--color-text-secondary);line-height:1.5}
+  .tag-purple{color:#7F77DD}
+  .tag-teal{color:#1D9E75}
+  .tag-coral{color:#D85A30}
+  .tag-amber{color:#BA7517}
+  .tag-blue{color:#378ADD}
+  .section-label{font-size:12px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;margin-top:4px}
+  .thinker-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:0.5px solid var(--color-border-tertiary)}
+  .thinker-row:last-child{border-bottom:none}
+  .avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+  .av-purple{background:#EEEDFE;color:#3C3489}
+  .av-teal{background:#E1F5EE;color:#085041}
+  .av-coral{background:#FAECE7;color:#993C1D}
+  .av-amber{background:#FAEEDA;color:#633806}
+  .av-blue{background:#E6F1FB;color:#0C447C}
+  .av-gray{background:#F1EFE8;color:#2C2C2A}
+  .thinker-name{font-size:14px;font-weight:500}
+  .thinker-sub{font-size:12px;color:var(--color-text-secondary)}
+  .thinker-contrib{font-size:13px;color:var(--color-text-primary);margin-top:2px}
+  .mech-block{border-left:2px solid var(--color-border-secondary);padding:10px 14px;margin-bottom:10px;border-radius:0 var(--border-radius-md) var(--border-radius-md) 0;background:var(--color-background-secondary)}
+  .mech-title{font-size:14px;font-weight:500;margin-bottom:3px}
+  .mech-desc{font-size:13px;color:var(--color-text-secondary)}
+  .mech-block.purple{border-left-color:#7F77DD}
+  .mech-block.teal{border-left-color:#1D9E75}
+  .mech-block.coral{border-left-color:#D85A30}
+  .mech-block.amber{border-left-color:#BA7517}
+  .mech-block.blue{border-left-color:#378ADD}
+  .mech-block.gray{border-left-color:#888780}
+  .flex-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px}
+  .badge{font-size:11px;padding:3px 9px;border-radius:20px;font-weight:500}
+  .badge-purple{background:#EEEDFE;color:#3C3489}
+  .badge-teal{background:#E1F5EE;color:#085041}
+  .badge-coral{background:#FAECE7;color:#993C1D}
+  .ask-btn{font-size:12px;color:var(--color-text-info);cursor:pointer;background:none;border:none;padding:0;margin-top:4px;font-family:var(--font-sans)}
+  .ask-btn:hover{opacity:.7}
+  .note{font-size:12px;color:var(--color-text-tertiary);margin-top:8px;font-style:italic}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div style="padding:0.5rem 0 1.5rem">
+<div class="flex-row">
+  <span style="font-size:16px;font-weight:500">Power, status &amp; influence</span>
+  <span class="badge badge-purple">Academic reference</span>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('power',this)">Bases of power</button>
+  <button class="tab" onclick="switchTab('status',this)">Status dynamics</button>
+  <button class="tab" onclick="switchTab('influence',this)">Influence principles</button>
+  <button class="tab" onclick="switchTab('thinkers',this)">Key thinkers</button>
+</div>
+
+<!-- POWER -->
+<div id="panel-power" class="panel active">
+  <div class="section-label">French &amp; Raven (1959) — extended taxonomy</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-tag tag-amber">Reward</div>
+      <h3>Reward power</h3>
+      <p>Control over valued outcomes — pay, recognition, privileges. Effective but transient; compliance ends when rewards stop.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-coral">Coercive</div>
+      <h3>Coercive power</h3>
+      <p>Ability to punish. Creates compliance but generates resentment and resistance over time.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-purple">Legitimate</div>
+      <h3>Legitimate power</h3>
+      <p>Authority derived from a recognized role or title. Depends entirely on others accepting the social structure.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-teal">Referent</div>
+      <h3>Referent power</h3>
+      <p>Influence via identification and admiration. The most durable form — operates without direct interaction.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-blue">Expert</div>
+      <h3>Expert power</h3>
+      <p>Influence through perceived knowledge or skill. Narrow in scope — expertise in one domain doesn't transfer.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-amber">Informational</div>
+      <h3>Informational power</h3>
+      <p>Control over access to knowledge itself, not just expertise. Key in bureaucracies and gatekeeping roles.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:20px">
+    <div class="section-label">Bourdieu's capital framework</div>
+    <div class="grid">
+      <div class="card">
+        <div class="card-tag tag-teal">Social</div>
+        <h3>Social capital</h3>
+        <p>Network ties and group membership. Who you know and who vouches for you.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag-purple">Cultural</div>
+        <h3>Cultural capital</h3>
+        <p>Tastes, credentials, manners. Embodied dispositions that signal belonging to dominant groups.</p>
+      </div>
+      <div class="card">
+        <div class="card-tag tag-coral">Symbolic</div>
+        <h3>Symbolic capital</h3>
+        <p>Honour, prestige, recognition. Power that disguises itself as merit or distinction.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS -->
+<div id="panel-status" class="panel">
+  <div class="section-label">Status Characteristics Theory (Berger et al., 1977)</div>
+  <div class="mech-block purple">
+    <div class="mech-title">Diffuse status characteristics</div>
+    <div class="mech-desc">Broad social categories (gender, race, age) that carry generalized performance expectations. Activate automatically in task groups, creating unequal participation even when irrelevant to the task.</div>
+  </div>
+  <div class="mech-block teal">
+    <div class="mech-title">Specific status characteristics</div>
+    <div class="mech-desc">Task-relevant attributes (demonstrated skill, formal credentials). Shape influence but only within domains where they apply.</div>
+  </div>
+  <div class="mech-block amber">
+    <div class="mech-title">Status generalization</div>
+    <div class="mech-desc">The key mechanism: high-status individuals are assumed more competent across tasks. The effect persists even when observers are told to ignore the characteristic.</div>
+  </div>
+
+  <div class="section-label" style="margin-top:20px">Further status mechanisms</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-tag tag-purple">Self-fulfilling</div>
+      <h3>Expectation states</h3>
+      <p>Performance expectations shape actual behavior, creating feedback loops that entrench initial status orderings.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-teal">Nonverbal</div>
+      <h3>Status leakage</h3>
+      <p>Posture, eye contact, interruptions, and speaking time all signal and reinforce rank — often below conscious awareness.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-coral">Power paradox</div>
+      <h3>The power paradox</h3>
+      <p>Keltner: we gain power through empathy and cooperation, then lose it by becoming less empathic and more self-focused.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-amber">Defense</div>
+      <h3>Status threat responses</h3>
+      <p>Threatened status motivates aggressive dominance displays, in-group favoritism, and scapegoating of lower-status targets.</p>
+    </div>
+  </div>
+</div>
+
+<!-- INFLUENCE -->
+<div id="panel-influence" class="panel">
+  <div class="section-label">Cialdini's 7 principles of influence</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-tag tag-teal">Cialdini</div>
+      <h3>Reciprocity</h3>
+      <p>The obligation to return favors. Uninvited gifts create powerful compliance pressure; the norm is near-universal across cultures.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-purple">Cialdini</div>
+      <h3>Commitment &amp; consistency</h3>
+      <p>Once we commit, we align future behavior with that commitment. Small initial agreements escalate. Foot-in-the-door technique.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-blue">Cialdini</div>
+      <h3>Social proof</h3>
+      <p>We use others' behavior as information in ambiguous situations. Pluralistic ignorance is a dark side: everyone conforms to a norm no one actually holds.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-coral">Cialdini</div>
+      <h3>Authority</h3>
+      <p>Titles, uniforms, and credentials trigger deference. Milgram (1961) showed compliance with lethal commands from perceived authority.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-amber">Cialdini</div>
+      <h3>Liking</h3>
+      <p>We comply with people we like. Similarity, physical attractiveness, familiarity, and association all boost liking.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-teal">Cialdini</div>
+      <h3>Scarcity</h3>
+      <p>We want what we can't have. Psychological reactance: restrictions on freedom increase perceived desirability.</p>
+    </div>
+    <div class="card">
+      <div class="card-tag tag-purple">Cialdini</div>
+      <h3>Unity</h3>
+      <p>Shared identity (family, group, tribe) creates the deepest compliance. "We" — not just liking — drives influence at the identity level.</p>
+    </div>
+  </div>
+
+  <div style="margin-top:20px">
+    <div class="section-label">Other core influence mechanisms</div>
+    <div class="mech-block gray">
+      <div class="mech-title">Conformity &amp; normative influence (Asch, 1951)</div>
+      <div class="mech-desc">People deny clear perceptual evidence to agree with a unanimous group. Driven by desire for acceptance, not information.</div>
+    </div>
+    <div class="mech-block blue">
+      <div class="mech-title">Minority influence (Moscovici)</div>
+      <div class="mech-desc">Consistent, committed minorities can shift majority opinion over time — a different pathway from majority conformity, operating through deeper processing.</div>
+    </div>
+  </div>
+</div>
+
+<!-- THINKERS -->
+<div id="panel-thinkers" class="panel">
+  <div class="section-label">Foundational theorists</div>
+
+  <div class="thinker-row">
+    <div class="avatar av-purple">FR</div>
+    <div>
+      <div class="thinker-name">French &amp; Raven</div>
+      <div class="thinker-sub">Social psychologists, 1950s–60s</div>
+      <div class="thinker-contrib">Developed the canonical taxonomy of social power bases. Still the most-cited framework in organizational and political psychology.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-blue">PB</div>
+    <div>
+      <div class="thinker-name">Pierre Bourdieu</div>
+      <div class="thinker-sub">Sociologist, 1930–2002</div>
+      <div class="thinker-contrib">Field theory, habitus, and capital. Argued power reproduces itself through symbolic misrecognition — dominated groups often unwittingly participate in their own domination.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-coral">MF</div>
+    <div>
+      <div class="thinker-name">Michel Foucault</div>
+      <div class="thinker-sub">Philosopher, 1926–1984</div>
+      <div class="thinker-contrib">Power is diffuse, not held — it flows through discourse, institutions, and normalized practices. Discipline and Punish: modern power works through surveillance, not violence.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-teal">RC</div>
+    <div>
+      <div class="thinker-name">Robert Cialdini</div>
+      <div class="thinker-sub">Social psychologist, 1945–</div>
+      <div class="thinker-contrib">Identified 7 empirically-grounded principles of influence through field experiments and participant observation. Influence (1984) bridges lab science and applied persuasion.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-amber">JB</div>
+    <div>
+      <div class="thinker-name">Joseph Berger et al.</div>
+      <div class="thinker-sub">Sociologists, Stanford, 1970s–</div>
+      <div class="thinker-contrib">Status Characteristics Theory: formalized how socially-valued attributes translate into performance expectations in task groups, explaining persistent inequality in ostensibly meritocratic settings.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-gray">DK</div>
+    <div>
+      <div class="thinker-name">Dacher Keltner</div>
+      <div class="thinker-sub">Psychologist, UC Berkeley, 1962–</div>
+      <div class="thinker-contrib">The Power Paradox: power is earned through pro-social behavior but tends to corrupt those who hold it, reducing empathy and impulse control. Evidence from behavioral and neural studies.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-purple">SM</div>
+    <div>
+      <div class="thinker-name">Stanley Milgram</div>
+      <div class="thinker-sub">Social psychologist, 1933–1984</div>
+      <div class="thinker-contrib">Obedience to authority experiments (1961–62). ~65% of participants administered apparently lethal shocks when instructed by an authority figure. Foundational for understanding legitimate power and moral disengagement.</div>
+    </div>
+  </div>
+
+  <div class="thinker-row">
+    <div class="avatar av-teal">SF</div>
+    <div>
+      <div class="thinker-name">Susan Fiske</div>
+      <div class="thinker-sub">Social psychologist, Princeton, 1952–</div>
+      <div class="thinker-contrib">Stereotype Content Model: groups are stereotyped on warmth × competence axes, predicting envy, admiration, contempt, or pity. Power and status are indexed along the competence dimension.</div>
+    </div>
+  </div>
+
+  <p class="note">Note: interactive "Ask more" buttons are functional in the Claude chat version only.</p>
+</div>
+
+</div><!-- end container -->
+</div>
+
+<script>
+function switchTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+}
+</script>
+</body>
+</html>
